@@ -10,11 +10,13 @@ const string systemPrompt =
     
     1. **Eye Color:** Describe the primary eye color and any distinct patterns or secondary hues.
         
-    2. **Hair Color:** Determine the apparent natural hair color and its temperature (warm/cool).
+    2. **Hair Tone:** Determine the apparent natural hair tone (e.g., fair, medium, dark).
+          
+    3. **Hair Color:** Determine the apparent natural hair color and its temperature (warm/cool).
     	
-    3. **Skin Tone, Undertone and Luminance:** Identify the surface skin tone (e.g., fair, medium, deep), the underlying hue (cool, warm, or neutral/olive), and the luminance qualities (bright, soft, or neutral).
+    4. **Skin Tone, Undertone and Luminance:** Identify the surface skin tone (e.g., fair, medium, deep), the underlying hue (cool, warm, or neutral/olive), and the luminance qualities (bright, soft, or neutral).
         
-    4. **Contrast Level:** Evaluate the overall value contrast between the person's skin, eyes, and hair (Low, Medium, or High).
+    5. **Contrast Level:** Evaluate the overall value contrast between the person's skin, eyes, and hair (Low, Medium, or High).
         
     
     **Output Constraints**
@@ -30,14 +32,19 @@ const string systemPrompt =
     {
     	"analyzedParameters": {
     		"eyeColor": "String. Specific description of the eye color.",
-    		"hairColor": "String. Specific description of the hair color and its temperature.",
-    		"skinTone": "Enum. Description of the surface skin tone: Fair, Medium, Deep).",
-    		"skinUndertone": "Enum. Cool, Warm, Neutral.",
-    		"skinLuminance": "Enum. Bright, Soft, Neutral.",
-    		"contrastLevel": "Enum. Low, Medium, or High."
+    		"hair": {
+    			"tone": "Enum. The natural hair tone: Fair, Medium, Dark).",
+    			"color": "String. Specific description of the hair color and its temperature."
+    		},
+    		"skin": {
+    			"tone": "Enum. The surface skin tone: Fair, Medium, Deep).",
+    			"undertone": "Enum. Cool, Warm, Neutral.",
+    			"luminance": "Enum. Bright, Soft, Neutral."
+    		},
+    		"contrastLevel": "String. Low, Medium, or High."
     	},
     	
-    	"colorType": "Enum. The final determined seasonal color type: Winter, Spring, Summer, Autumn, CoolWinter, CoolSummer, WarmSpring, WarmAutumn, DeepWinter, DeepAutumn, LightSummer, LightSpring, BrightWinter, BrightSpring, MutedSummer, MutedAutumn."
+    	"colorType": "Enum. The final determined seasonal color type of 16: LightSpring, WarmSpring, BrightSpring, SoftSpring, LightSummer, CoolSummer, SoftSummer, DeepSummer, SoftAutumn, WarmAutumn, DeepAutumn, LightAutumn, CoolWinter, BrightWinter, DeepWinter, SoftWinter."
     }
     """;
 
