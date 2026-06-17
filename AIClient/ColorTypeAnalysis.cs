@@ -2,12 +2,73 @@ using System.Text.Json.Serialization;
 
 namespace ColorTypeGuide.AiClient;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum HairTone
+{
+    Fair,
+    Medium,
+    Dark
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum SkinTone
+{
+    Fair,
+    Medium,
+    Deep
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Undertone
+{
+    Cool,
+    Warm,
+    Neutral
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Luminance
+{
+    Bright,
+    Soft,
+    Neutral
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ContrastLevel
+{
+    Low,
+    Medium,
+    High
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum SeasonalColorType
+{
+    LightSpring,
+    WarmSpring,
+    BrightSpring,
+    SoftSpring,
+    LightSummer,
+    CoolSummer,
+    SoftSummer,
+    DeepSummer,
+    SoftAutumn,
+    WarmAutumn,
+    DeepAutumn,
+    LightAutumn,
+    CoolWinter,
+    BrightWinter,
+    DeepWinter,
+    SoftWinter
+}
+
 public record ColorTypeAnalysis(
     [property: JsonPropertyName("analyzedParameters")]
     AnalyzedParameters? AnalyzedParameters,
 
     [property: JsonPropertyName("colorType")]
-    string? ColorType
+    SeasonalColorType? ColorType
 );
 
 public record AnalyzedParameters(
@@ -21,12 +82,12 @@ public record AnalyzedParameters(
     SkinAnalysis? Skin,
 
     [property: JsonPropertyName("contrastLevel")]
-    string? ContrastLevel
+    ContrastLevel? ContrastLevel
 );
 
 public record HairAnalysis(
     [property: JsonPropertyName("tone")]
-    string? Tone,
+    HairTone? Tone,
 
     [property: JsonPropertyName("color")]
     string? Color
@@ -34,11 +95,11 @@ public record HairAnalysis(
 
 public record SkinAnalysis(
     [property: JsonPropertyName("tone")]
-    string? Tone,
+    SkinTone? Tone,
 
     [property: JsonPropertyName("undertone")]
-    string? Undertone,
+    Undertone? Undertone,
 
     [property: JsonPropertyName("luminance")]
-    string? Luminance
+    Luminance? Luminance
 );
