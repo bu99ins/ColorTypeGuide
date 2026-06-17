@@ -4,5 +4,5 @@ namespace ColorTypeGuide.AiClient;
 
 public interface ICompletionStrategy
 {
-    Task<(string, ChatFinishReason?)> CompleteAsync(List<ChatMessage> chatMessages, CancellationToken token);
+    Task<(T?, ChatFinishReason?)> CompleteAsync<T>(List<ChatMessage> chatMessages, CancellationToken token);
 }

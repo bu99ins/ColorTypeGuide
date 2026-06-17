@@ -1,15 +1,23 @@
+using System.Text.Json;
 using Microsoft.Extensions.AI;
 
 namespace ColorTypeGuide.AiClient;
 
 public class SimpleCompletion(IChatClient chatClient, ChatOptions? options = null) : ICompletionStrategy
 {
-    public async Task<(string, ChatFinishReason?)> CompleteAsync(List<ChatMessage> chatMessages, CancellationToken token)
+    public async Task<(T?, ChatFinishReason?)> CompleteAsync<T>(List<ChatMessage> chatMessages, CancellationToken token)
     {
-        var result = await chatClient.GetResponseAsync(chatMessages, options, token);
+        var result = await chatClient.GetResponseAsync<T>(chatMessages, options, cancellationToken: token);
 
-        Console.Write(result.Text);
+        if (result.Result is not null)
+        {
+            Console.WriteLine(JsonSerializer.Serialize(result.Result, new JsonSerializerOptions { WriteIndented = true }));
+        }
+        else
+        {
+            Console.Write(result.Text);
+        }
 
-        return (result.Text, result.FinishReason);
+        return (result.Result, result.FinishReason);
     }
 }

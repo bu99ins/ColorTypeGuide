@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ColorTypeGuide.AiClient;
 using ColorTypeGuide.AiClientFactory;
 using Microsoft.Extensions.AI;
 
@@ -88,11 +89,11 @@ Console.CancelKeyPress += handler;
 try
 {
     var message = new ChatMessage(ChatRole.User, "Define the seasonal color type for the attached image.");
-    message.Contents.Add(new DataContent(File.ReadAllBytes(@"C:\_Projects\ColorTypeGuide\data\pic1.jpg"), "image/jpeg"));
+    message.Contents.Add(new DataContent(File.ReadAllBytes(@"C:\_Projects\ColorTypeGuide\data\pic2.jpg"), "image/jpeg"));
         
     // Get response from the model
     Console.ForegroundColor = ConsoleColor.White;
-    var (_, lastReason) = await completion.CompleteAsync([systemMessage, message], cts.Token);
+    var (analysis, lastReason) = await completion.CompleteAsync<ColorTypeAnalysis>([systemMessage, message], cts.Token);
 
     if (lastReason != null && lastReason != ChatFinishReason.Stop)
     {
